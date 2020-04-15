@@ -3,16 +3,14 @@ package main
 import (
 	"log"
 
-	"github.com/microapis/transbank-sdk-golang/pkg/service"
 	"github.com/microapis/transbank-sdk-golang/pkg/webpay"
 )
 
 func main() {
-	token := "ea67dd4a90f2abc7d577c35dfcca5d3bd9688f528515a9f35c7408b42e01a7a"
+	token := "ec3ff8ef147754ce4ce82700cb90faebefc3841715716d364988297b019d4e47"
 
-	w := webpay.NewIntegrationPlusNormal()
-
-	result, err := service.GetPlusNormal(w).GetTransactionResult(token)
+	service := webpay.NewIntegrationPlusNormal()
+	result, err := service.GetTransactionResult(token)
 	if err != nil {
 		log.Fatalln(err)
 	}
