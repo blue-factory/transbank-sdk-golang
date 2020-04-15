@@ -12,15 +12,6 @@ const (
 	transactionType = "TR_NORMAL_WS"
 )
 
-// ParamsPlusNormal ...
-type ParamsPlusNormal struct {
-	Amount    float64
-	BuyOrder  string
-	SessionID string
-	ReturnURL string
-	FinalURL  string
-}
-
 // ResponsePlusNormalInitTransaction ...
 type ResponsePlusNormalInitTransaction struct {
 	URL   string `json:"url"`
@@ -59,19 +50,19 @@ type PlusNormal struct {
 }
 
 // InitTransaction ...
-func (pn *PlusNormal) InitTransaction(params ParamsPlusNormal) (*ResponsePlusNormalInitTransaction, error) {
+func (pn *PlusNormal) InitTransaction(amount float64, sessionID, buyOrder, returnURL, finalURL string) (*ResponsePlusNormalInitTransaction, error) {
 	bodyRequest := plusNormalInitTransactionBodyRequest{
 		ID:        "_0",
 		XMLnsSOAP: "http://schemas.xmlsoap.org/soap/envelope/",
 		TnsInitTransaction: plusNormalInitTransactionResquest{
 			XMLnsTns:          "http://service.wswebpay.webpay.transbank.com/",
-			SessionID:         params.SessionID,
-			ReturnURL:         params.ReturnURL,
-			FinalURL:          params.FinalURL,
-			CommerceCode:      pn.Webpay.Config.CommerceCode,
-			Amount:            params.Amount,
-			BuyOrder:          params.BuyOrder,
-			DetailBuyOrder:    params.BuyOrder,
+			SessionID:         sessionID,
+			ReturnURL:         returnURL,
+			FinalURL:          finalURL,
+			CommerceCode:      pn.Webpay.GetCommerceCode(),
+			Amount:            amount,
+			BuyOrder:          buyOrder,
+			DetailBuyOrder:    buyOrder,
 			WSTransactionType: transactionType,
 		},
 	}

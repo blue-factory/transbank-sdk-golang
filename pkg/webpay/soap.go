@@ -60,28 +60,28 @@ func (w *Webpay) SOAP(payload interface{}) ([]byte, error) {
 func buildWsdlURL(environment string, service string) string {
 	e := ""
 	switch environment {
-	case environmentIntegration, environmentTest, environmentCertification:
+	case EnvironmentIntegration, EnvironmentTest, EnvironmentCertification:
 		e = "int"
 	}
 
 	s := "WSWebpayTransaction/cxf"
-	if service == serviceOneClick {
+	if service == ServiceOneClick {
 		s = "webpayserver/wswebpay"
 	}
 
 	var wsdl string
 	switch service {
-	case serviceCapture:
+	case ServiceCapture:
 		wsdl = wsdlUrlsCapture
-	case serviceMallNormal:
+	case ServiceMallNormal:
 		wsdl = wsdlUrlsMallNormal
-	case serviceNormal:
+	case ServiceNormal:
 		wsdl = wsdlUrlsNormal
-	case serviceNullify:
+	case ServiceNullify:
 		wsdl = wsdlUrlsNullify
-	case serviceOneClick:
+	case ServiceOneClick:
 		wsdl = wsdlUrlsOneClick
-	case serviceOneClickMall:
+	case ServiceOneClickMall:
 		wsdl = wsdlUrlsOneClickMall
 	}
 

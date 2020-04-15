@@ -106,14 +106,14 @@ type SoapFault struct {
 
 func (w *Webpay) generateXMLRequest(payload interface{}) ([]byte, error) {
 	// decode and parse public cert
-	block, _ := pem.Decode([]byte(w.Config.PublicCert))
+	block, _ := pem.Decode([]byte(w.GetPublicCert()))
 	cert, err := x509.ParseCertificate(block.Bytes)
 	if err != nil {
 		return nil, err
 	}
 
 	// sanitilize certificate value
-	public := strings.ReplaceAll(w.Config.PublicCert, "-----BEGIN CERTIFICATE-----", "")
+	public := strings.ReplaceAll(w.GetPublicCert(), "-----BEGIN CERTIFICATE-----", "")
 	public = strings.ReplaceAll(public, "-----END CERTIFICATE-----", "")
 	public = strings.ReplaceAll(public, "\r\n", "")
 	public = strings.ReplaceAll(public, "\n", "")
@@ -242,7 +242,7 @@ func (w *Webpay) signatureValue(digest string) (string, error) {
 		return "", err
 	}
 
-	hash, err := hashRSASha1(parse, w.Config.PrivateCert)
+	hash, err := hashRSASha1(parse, w.GetPrivateCert())
 	if err != nil {
 		return "", err
 	}
