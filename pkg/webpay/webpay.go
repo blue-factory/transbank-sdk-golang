@@ -77,27 +77,3 @@ func (w *Webpay) SetEnvironment(environment string) error {
 
 	return nil
 }
-
-// // GetTransbankCert ...
-// func (w *Webpay) GetTransbankCert() string {
-// 	tc := integration.TransbankCert
-
-// 	switch w.environment {
-// 	case environmentIntegration, environmentTest, environmentCertification:
-// 		tc = integration.TransbankIntegrationCert
-// 	}
-
-// 	return tc
-// }
-
-// Clone ...
-func (w *Webpay) Clone() Webpay {
-	clone := Webpay{
-		Config:      w.Config,
-		environment: w.environment,
-		service:     w.service,
-		wsdlURL:     w.wsdlURL,
-	}
-
-	return clone
-}
