@@ -1,62 +1,23 @@
-package service
+package webpay
 
 import (
 	"encoding/xml"
 	"errors"
 	"fmt"
 
-	"github.com/microapis/transbank-sdk-golang/pkg/webpay"
+	"github.com/microapis/transbank-sdk-golang/pkg/transbank"
 )
 
 const (
 	transactionType = "TR_NORMAL_WS"
 )
 
-// ResponsePlusNormalInitTransaction represents the "initTransactionResponse" SOAP server response
-type ResponsePlusNormalInitTransaction struct {
-	URL   string `json:"url"`
-	Token string `json:"token"`
-}
-
-// ResponsePlusNormalTransactionResult represents the "getTransactionResultResponse" SOAP server response
-type ResponsePlusNormalTransactionResult struct {
-	AccountingDate  string       `json:"accounting_date"`
-	BuyOrder        string       `json:"buy_order"`
-	CardDetail      cardDetail   `json:"card_detail"`
-	DetailOutput    detailOutput `json:"detail_output"`
-	SessionID       string       `json:"session_id"`
-	TransactionDate string       `json:"transaction_date"`
-	URLRedirection  string       `json:"url_redirection"`
-	VCI             string       `json:"vci"`
-}
-
-type cardDetail struct {
-	CardNumber string `json:"card_number"`
-}
-
-type detailOutput struct {
-	SharesNumber      int     `json:"shares_number"`
-	Amount            float64 `json:"amount"`
-	CommerceCode      string  `json:"commerce_code"`
-	BuyOrder          string  `json:"buy_order"`
-	AuthorizationCode string  `json:"authorization_code"`
-	PaymentTypeCode   string  `json:"payment_type_code"`
-	ResponseCode      string  `json:"response_code"`
-}
-
 type plusNormal struct {
-	webpay *webpay.Webpay
-}
-
-// GetPlusNormal returns an instance of Webpay's "plusNormal" service
-func GetPlusNormal(w *webpay.Webpay) *plusNormal {
-	return &plusNormal{
-		webpay: w,
-	}
+	webpay *Webpay
 }
 
 // InitTransaction performans a "plusNormal" transaction and returns a token
-func (pn *plusNormal) InitTransaction(amount float64, sessionID, buyOrder, returnURL, finalURL string) (*ResponsePlusNormalInitTransaction, error) {
+func (pn *plusNormal) InitTransaction(amount float64, sessionID, buyOrder, returnURL, finalURL string) (*transbank.ResponsePlusNormalInitTransaction, error) {
 	bodyRequest := plusNormalInitTransactionBodyRequest{
 		ID:        "_0",
 		XMLnsSOAP: "http://schemas.xmlsoap.org/soap/envelope/",
@@ -91,14 +52,14 @@ func (pn *plusNormal) InitTransaction(amount float64, sessionID, buyOrder, retur
 
 	it := res.Body.Ns2InitTransactionResponse
 
-	return &ResponsePlusNormalInitTransaction{
+	return &transbank.ResponsePlusNormalInitTransaction{
 		URL:   it.URL,
 		Token: it.Token,
 	}, nil
 }
 
 // GetTransactionResult validates a transaction given a token
-func (pn *plusNormal) GetTransactionResult(token string) (*ResponsePlusNormalTransactionResult, error) {
+func (pn *plusNormal) GetTransactionResult(token string) (*transbank.ResponsePlusNormalTransactionResult, error) {
 	bodyRequest := plusNormalTransactionResultBodyRequest{
 		ID:        "_0",
 		XMLnsSOAP: "http://schemas.xmlsoap.org/soap/envelope/",
@@ -126,13 +87,13 @@ func (pn *plusNormal) GetTransactionResult(token string) (*ResponsePlusNormalTra
 
 	tr := res.Body.Ns2TransactionResultResponse
 
-	return &ResponsePlusNormalTransactionResult{
+	return &transbank.ResponsePlusNormalTransactionResult{
 		AccountingDate: tr.AccountingDate,
 		BuyOrder:       tr.BuyOrder,
-		CardDetail: cardDetail{
+		CardDetail: transbank.CardDetail{
 			CardNumber: tr.CardNumber,
 		},
-		DetailOutput: detailOutput{
+		DetailOutput: transbank.DetailOutput{
 			SharesNumber:      tr.SharesNumber,
 			Amount:            tr.Amount,
 			CommerceCode:      tr.CommerceCode,
@@ -175,7 +136,7 @@ type plusNormalEnvolpeInitTransactionEnvolpeResponse struct {
 
 type plusNormalInitTransactionBodyResponse struct {
 	XMLName                    xml.Name `xml:"Body"`
-	Fault                      *webpay.SoapFault
+	Fault                      *SoapFault
 	Ns2InitTransactionResponse *plusNormalInitTransactionResponse
 }
 
@@ -205,7 +166,7 @@ type plusNormalTransactionResultEnvolpeResponse struct {
 
 type plusNormalTransactionResultBodyResponse struct {
 	XMLName                      xml.Name `xml:"Body"`
-	Fault                        *webpay.SoapFault
+	Fault                        *SoapFault
 	Ns2TransactionResultResponse *plusNormalTransactionResultResponse
 }
 
