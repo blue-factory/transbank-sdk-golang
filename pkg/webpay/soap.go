@@ -22,7 +22,7 @@ const (
 
 // SOAP ...
 func (w *Webpay) SOAP(payload interface{}) ([]byte, error) {
-	XMLReq, err := w.GetXMLRequest(payload)
+	XMLReq, err := w.generateXMLRequest(payload)
 	if err != nil {
 		return nil, err
 	}

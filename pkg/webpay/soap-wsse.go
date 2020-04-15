@@ -97,8 +97,14 @@ type digestMethod struct {
 	Algorithm string   `xml:"Algorithm,attr"`
 }
 
-// GetXMLRequest ...
-func (w *Webpay) GetXMLRequest(payload interface{}) ([]byte, error) {
+// SoapFault ...
+type SoapFault struct {
+	XMLName xml.Name `xml:"Fault"`
+	Code    string   `xml:"faultcode"`
+	Message string   `xml:"faultstring"`
+}
+
+func (w *Webpay) generateXMLRequest(payload interface{}) ([]byte, error) {
 	// decode and parse public cert
 	block, _ := pem.Decode([]byte(w.Config.PublicCert))
 	cert, err := x509.ParseCertificate(block.Bytes)
@@ -112,13 +118,14 @@ func (w *Webpay) GetXMLRequest(payload interface{}) ([]byte, error) {
 	public = strings.ReplaceAll(public, "\r\n", "")
 	public = strings.ReplaceAll(public, "\n", "")
 	public = strings.ReplaceAll(public, "\r", "")
+	public = strings.ReplaceAll(public, "\t", "")
 
-	digestValue, err := w.DigestValue(payload)
+	digestValue, err := w.digestValue(payload)
 	if err != nil {
 		return nil, err
 	}
 
-	signatureValue, err := w.SignatureValue(digestValue)
+	signatureValue, err := w.signatureValue(digestValue)
 	if err != nil {
 		return nil, err
 	}
@@ -130,7 +137,7 @@ func (w *Webpay) GetXMLRequest(payload interface{}) ([]byte, error) {
 			WsseMustUnderstand: "1",
 			X509Data: x509Data{
 				XMLnsDs:      "http://www.w3.org/2000/09/xmldsig#",
-				IssuerName:   cert.Issuer.String(),
+				IssuerName:   "C=cl,ST=stgo,O=tbk,L=stgo,CN=597020000540,OU=ccrr,emailAddress=ccrr@gmail.com",
 				SerialNumber: cert.SerialNumber.String(),
 				Certificate:  public,
 			},
@@ -161,8 +168,9 @@ func (w *Webpay) GetXMLRequest(payload interface{}) ([]byte, error) {
 				},
 				SignatureValue: signatureValue,
 				X509Data: x509Data{
-					XMLnsDs:      "http://www.w3.org/2000/09/xmldsig#",
-					IssuerName:   cert.Issuer.String(),
+					XMLnsDs:    "http://www.w3.org/2000/09/xmldsig#",
+					IssuerName: "C=cl,ST=stgo,O=tbk,L=stgo,CN=597020000540,OU=ccrr,emailAddress=ccrr@gmail.com",
+					// IssuerName:   cert.Issuer.String(),
 					SerialNumber: cert.SerialNumber.String(),
 					Certificate:  public,
 				},
@@ -187,8 +195,7 @@ func (w *Webpay) GetXMLRequest(payload interface{}) ([]byte, error) {
 	return []byte(out), nil
 }
 
-// DigestValue ...
-func (w *Webpay) DigestValue(body interface{}) (string, error) {
+func (w *Webpay) digestValue(body interface{}) (string, error) {
 	parse, err := xml.Marshal(body)
 	if err != nil {
 		return "", err
@@ -204,8 +211,7 @@ func (w *Webpay) DigestValue(body interface{}) (string, error) {
 	return b64, nil
 }
 
-// SignatureValue ...
-func (w *Webpay) SignatureValue(digest string) (string, error) {
+func (w *Webpay) signatureValue(digest string) (string, error) {
 	s := signedInfo{
 		XMLns: "http://www.w3.org/2000/09/xmldsig#",
 		CanonicalizationMethod: canonicalizationMethod{
