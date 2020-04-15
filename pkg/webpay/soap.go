@@ -20,14 +20,14 @@ const (
 	wsdlUrlsOneClickMall = "WSOneClickMulticodeService"
 )
 
-// SOAP ...
+// SOAP This method performs a SOAP request to the server with a given payload
 func (w *Webpay) SOAP(payload interface{}) ([]byte, error) {
 	XMLReq, err := w.generateXMLRequest(payload)
 	if err != nil {
 		return nil, err
 	}
 
-	url := w.wsdlURL
+	url := buildWsdlURL(w.config.Service, w.config.Environment)
 
 	client := http.Client{
 		Timeout: time.Duration(50 * time.Second),
@@ -56,7 +56,6 @@ func (w *Webpay) SOAP(payload interface{}) ([]byte, error) {
 	return b, nil
 }
 
-// buildWsdlURL ...
 func buildWsdlURL(environment string, service string) string {
 	e := ""
 	switch environment {

@@ -12,13 +12,13 @@ const (
 	transactionType = "TR_NORMAL_WS"
 )
 
-// ResponsePlusNormalInitTransaction ...
+// ResponsePlusNormalInitTransaction represents the "initTransactionResponse" SOAP server response
 type ResponsePlusNormalInitTransaction struct {
 	URL   string `json:"url"`
 	Token string `json:"token"`
 }
 
-// ResponsePlusNormalTransactionResult ...
+// ResponsePlusNormalTransactionResult represents the "getTransactionResultResponse" SOAP server response
 type ResponsePlusNormalTransactionResult struct {
 	AccountingDate  string       `json:"accounting_date"`
 	BuyOrder        string       `json:"buy_order"`
@@ -44,13 +44,19 @@ type detailOutput struct {
 	ResponseCode      string  `json:"response_code"`
 }
 
-// PlusNormal ...
-type PlusNormal struct {
-	Webpay *webpay.Webpay
+type plusNormal struct {
+	webpay *webpay.Webpay
 }
 
-// InitTransaction ...
-func (pn *PlusNormal) InitTransaction(amount float64, sessionID, buyOrder, returnURL, finalURL string) (*ResponsePlusNormalInitTransaction, error) {
+// GetPlusNormal returns an instance of Webpay's "plusNormal" service
+func GetPlusNormal(w *webpay.Webpay) *plusNormal {
+	return &plusNormal{
+		webpay: w,
+	}
+}
+
+// InitTransaction performans a "plusNormal" transaction and returns a token
+func (pn *plusNormal) InitTransaction(amount float64, sessionID, buyOrder, returnURL, finalURL string) (*ResponsePlusNormalInitTransaction, error) {
 	bodyRequest := plusNormalInitTransactionBodyRequest{
 		ID:        "_0",
 		XMLnsSOAP: "http://schemas.xmlsoap.org/soap/envelope/",
@@ -59,7 +65,7 @@ func (pn *PlusNormal) InitTransaction(amount float64, sessionID, buyOrder, retur
 			SessionID:         sessionID,
 			ReturnURL:         returnURL,
 			FinalURL:          finalURL,
-			CommerceCode:      pn.Webpay.GetCommerceCode(),
+			CommerceCode:      pn.webpay.GetCommerceCode(),
 			Amount:            amount,
 			BuyOrder:          buyOrder,
 			DetailBuyOrder:    buyOrder,
@@ -67,7 +73,7 @@ func (pn *PlusNormal) InitTransaction(amount float64, sessionID, buyOrder, retur
 		},
 	}
 
-	b, err := pn.Webpay.SOAP(bodyRequest)
+	b, err := pn.webpay.SOAP(bodyRequest)
 	if err != nil {
 		return nil, err
 	}
@@ -91,8 +97,8 @@ func (pn *PlusNormal) InitTransaction(amount float64, sessionID, buyOrder, retur
 	}, nil
 }
 
-// GetTransactionResult ...
-func (pn *PlusNormal) GetTransactionResult(token string) (*ResponsePlusNormalTransactionResult, error) {
+// GetTransactionResult validates a transaction given a token
+func (pn *plusNormal) GetTransactionResult(token string) (*ResponsePlusNormalTransactionResult, error) {
 	bodyRequest := plusNormalTransactionResultBodyRequest{
 		ID:        "_0",
 		XMLnsSOAP: "http://schemas.xmlsoap.org/soap/envelope/",
@@ -102,7 +108,7 @@ func (pn *PlusNormal) GetTransactionResult(token string) (*ResponsePlusNormalTra
 		},
 	}
 
-	b, err := pn.Webpay.SOAP(bodyRequest)
+	b, err := pn.webpay.SOAP(bodyRequest)
 	if err != nil {
 		return nil, err
 	}
@@ -142,18 +148,6 @@ func (pn *PlusNormal) GetTransactionResult(token string) (*ResponsePlusNormalTra
 	}, nil
 }
 
-/**************************************************/
-
-// GetPlusNormal ...
-func GetPlusNormal(w *webpay.Webpay) *PlusNormal {
-	return &PlusNormal{
-		Webpay: w,
-	}
-}
-
-/**************************************************/
-
-// plusNormalInitTransactionBodyRequest ...
 type plusNormalInitTransactionBodyRequest struct {
 	XMLName            xml.Name `xml:"soap:Body"`
 	XMLnsSOAP          string   `xml:"xmlns:soap,attr,omitempty"`
@@ -161,7 +155,6 @@ type plusNormalInitTransactionBodyRequest struct {
 	TnsInitTransaction plusNormalInitTransactionResquest
 }
 
-// plusNormalInitTransactionResquest ...
 type plusNormalInitTransactionResquest struct {
 	XMLName           xml.Name `xml:"tns:initTransaction"`
 	XMLnsTns          string   `xml:"xmlns:tns,attr,omitempty"`
@@ -175,29 +168,23 @@ type plusNormalInitTransactionResquest struct {
 	WSTransactionType string   `xml:"wsInitTransactionInput>wSTransactionType"`
 }
 
-// plusNormalEnvolpeInitTransactionEnvolpeResponse ...
 type plusNormalEnvolpeInitTransactionEnvolpeResponse struct {
 	XMLName xml.Name `xml:"Envelope"`
 	Body    plusNormalInitTransactionBodyResponse
 }
 
-// plusNormalInitTransactionBodyResponse ...
 type plusNormalInitTransactionBodyResponse struct {
 	XMLName                    xml.Name `xml:"Body"`
 	Fault                      *webpay.SoapFault
 	Ns2InitTransactionResponse *plusNormalInitTransactionResponse
 }
 
-// plusNormalInitTransactionResponse ...
 type plusNormalInitTransactionResponse struct {
 	XMLName xml.Name `xml:"initTransactionResponse"`
 	Token   string   `xml:"return>token"`
 	URL     string   `xml:"return>url"`
 }
 
-/**************************************************/
-
-// plusNormalTransactionResultBodyRequest ...
 type plusNormalTransactionResultBodyRequest struct {
 	XMLName                   xml.Name `xml:"soap:Body"`
 	XMLnsSOAP                 string   `xml:"xmlns:soap,attr,omitempty"`
@@ -205,27 +192,23 @@ type plusNormalTransactionResultBodyRequest struct {
 	TnsAcknowledgeTransaction plusNormalTransactionResultResquest
 }
 
-// plusNormalTransactionResultResquest ...
 type plusNormalTransactionResultResquest struct {
 	XMLName    xml.Name `xml:"tns:getTransactionResult"`
 	XMLnsTns   string   `xml:"xmlns:tns,attr,omitempty"`
 	TokenInput string   `xml:"tokenInput"`
 }
 
-// plusNormalTransactionResultEnvolpeResponse ...
 type plusNormalTransactionResultEnvolpeResponse struct {
 	XMLName xml.Name                                `xml:"Envelope"`
 	Body    plusNormalTransactionResultBodyResponse `xml:"Body"`
 }
 
-// plusNormalTransactionResultBodyResponse ...
 type plusNormalTransactionResultBodyResponse struct {
 	XMLName                      xml.Name `xml:"Body"`
 	Fault                        *webpay.SoapFault
 	Ns2TransactionResultResponse *plusNormalTransactionResultResponse
 }
 
-// plusNormalTransactionResultResponse ...
 type plusNormalTransactionResultResponse struct {
 	XMLName           xml.Name `xml:"getTransactionResultResponse"`
 	AccountingDate    string   `xml:"return>accountingDate"`

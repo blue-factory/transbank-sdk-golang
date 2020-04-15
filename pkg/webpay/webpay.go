@@ -1,24 +1,15 @@
 package webpay
 
-// Webpay ...
+// Webpay holds configuration that will be used by the services `service`
 type Webpay struct {
-	config  *configuration
-	wsdlURL string
-}
-
-func (w *Webpay) GetPrivateCert() string {
-	return w.config.PrivateCert
-}
-
-func (w *Webpay) GetPublicCert() string {
-	return w.config.PublicCert
+	config *configuration
 }
 
 func (w *Webpay) GetCommerceCode() int64 {
 	return w.config.CommerceCode
 }
 
-// New ...
+// New returns a configured Webpay instance
 func New(privateCert, publicCert string, commerceCode int64, commerceEmail, service, environment string) (*Webpay, error) {
 	c, err := newConfiguration(privateCert, publicCert, commerceCode, commerceEmail, service, environment)
 	if err != nil {
@@ -28,15 +19,15 @@ func New(privateCert, publicCert string, commerceCode int64, commerceEmail, serv
 	return new(c), nil
 }
 
-// NewIntegrationPlusNormal ...
+// NewIntegrationPlusNormal returns a configured Webpay instance that will use
+// the integration environment
 func NewIntegrationPlusNormal() *Webpay {
-	return new(GetIntegrationPlusNormal())
+	return new(getIntegrationPlusNormal())
 }
 
 func new(c *configuration) *Webpay {
 	w := &Webpay{
-		config:  c,
-		wsdlURL: buildWsdlURL(c.Environment, c.Service),
+		config: c,
 	}
 
 	return w

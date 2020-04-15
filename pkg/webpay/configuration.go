@@ -85,8 +85,7 @@ func newConfiguration(privateCert, publicCert string, commerceCode int64, commer
 	}, nil
 }
 
-// GetIntegrationPlusNormal ...
-func GetIntegrationPlusNormal() *configuration {
+func getIntegrationPlusNormal() *configuration {
 	return &configuration{
 		PrivateCert:   integrationPlusNormalPrivateCert,
 		PublicCert:    integrationPlusNormalPublicCert,
@@ -97,8 +96,7 @@ func GetIntegrationPlusNormal() *configuration {
 	}
 }
 
-// GetIntegrationPlusMall ...
-func GetIntegrationPlusMall() *configuration {
+func getIntegrationPlusMall() *configuration {
 	return &configuration{
 		PrivateCert:   integrationPlusMallPrivateCert,
 		PublicCert:    integrationPlusMallPublicCert,
@@ -109,8 +107,7 @@ func GetIntegrationPlusMall() *configuration {
 	}
 }
 
-// GetIntegrationPlusCapture ...
-func GetIntegrationPlusCapture() *configuration {
+func getIntegrationPlusCapture() *configuration {
 	return &configuration{
 		PrivateCert:   integrationPlusCapturePrivateCert,
 		PublicCert:    integrationPlusCapturePublicCert,
@@ -121,8 +118,7 @@ func GetIntegrationPlusCapture() *configuration {
 	}
 }
 
-// GetIntegrationOneClickNormal ...
-func GetIntegrationOneClickNormal() *configuration {
+func getIntegrationOneClickNormal() *configuration {
 	return &configuration{
 		PrivateCert:   integrationOneClickNormalPrivateCert,
 		PublicCert:    integrationOneClickNormalPublicCert,
@@ -133,8 +129,7 @@ func GetIntegrationOneClickNormal() *configuration {
 	}
 }
 
-// GetIntegrationPatpassNormal ...
-func GetIntegrationPatpassNormal() *configuration {
+func getIntegrationPatpassNormal() *configuration {
 	return &configuration{
 		PrivateCert:   integrationPatpassNormalPrivateCert,
 		PublicCert:    integrationPatpassNormalPublicCert,
