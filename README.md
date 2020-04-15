@@ -14,16 +14,16 @@ go get -v github.com/microapis/transbank-sdk-golang
 
 # Documentación
 
-Puedes ver la documentación generada en [godoc](https://godoc.org/github.com/microapis/transbank-skd-golang) para ver la implementación de la librería. Tambien puedes consultar la [documentación oficial](http://www.transbankdevelopers.cl/?m=api).
+Puedes ver la documentación generada en [godoc](https://godoc.org/github.com/microapis/transbank-skd-golang) para ver la implementación de la librería. Tambien puedes consultar la [documentación oficial](https://www.transbankdevelopers.cl/documentacion/como_empezar).
 
 # Uso
 
 ```golang
 c := configuration.GetIntegrationPlusNormal()
 w := webpay.New(c)
-t := service.GetPlusNormal(w)
+s := service.GetPlusNormal(w)
 
-transaction, err := t.InitTransaction(service.ParamsPlusNormal{
+transaction, err := s.InitTransaction(service.ParamsPlusNormal{
   Amount:    float64(1000),
   SessionID: "mi-id-de-sesion",
   BuyOrder:  int64(rand.Intn(9999999)),
@@ -38,7 +38,7 @@ log.Println(transaction.URL) // https://webpay3gint.transbank.cl/webpayserver/in
 log.Println(transaction.Token) // e95675887afd8c5ad7d7e146468452fc4bc896541688c78cd781ded0ddef0260
 ```
 
-Puedes ver más ejemplo sobre la implementación los demás servicios en la carpeta `/cmd`
+Puedes ver más ejemplos sobre la implementación los demás servicios en la carpeta `/cmd`
 
 # Testing
 
@@ -58,4 +58,4 @@ go test
 - [ ] One Click Capture: ...
 - [ ] One Click Nullify: ...
 - [ ] SOAP: verificar si la firma del XML en la respuesta es válida con los certificiados designados.
-- [ ] HTTP: implementar base de trabajo con la API Rest convivendo junto a SOAP.
+- [ ] HTTP: implementar base de trabajo para la API Rest convivendo junto a SOAP.
