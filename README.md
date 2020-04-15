@@ -14,7 +14,7 @@ go get -v github.com/microapis/transbank-sdk-golang
 
 # Documentación
 
-Puedes ver la documentación generada en [godoc](https://godoc.org/github.com/microapis/transbank-skd-golang) para ver la implementación de la librería. Tambien puedes consultar la [documentación oficial](http://www.transbankdevelopers.cl/?m=api)].
+Puedes ver la documentación generada en [godoc](https://godoc.org/github.com/microapis/transbank-skd-golang) para ver la implementación de la librería. Tambien puedes consultar la [documentación oficial](http://www.transbankdevelopers.cl/?m=api).
 
 # Uso
 
@@ -48,8 +48,8 @@ go test
 
 # Tareas Pendientes
 
-- [x] Plus Normal: implementar método `InitTransaction` con SOAP
-- [ ] Plus Normal: implementar método `GetTransactionResult` con SOAP
+- [x] Plus Normal: implementar método `InitTransaction` con SOAP.
+- [ ] Plus Normal: implementar método `GetTransactionResult` con SOAP.
 - [ ] Plus Mall: ...
 - [ ] Patpass: implementar método para crear transacción con HTTP.
 - [ ] Patpass: implementar método para confirmar transacción con HTTP.
