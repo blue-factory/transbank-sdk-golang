@@ -27,7 +27,7 @@ func (w *Webpay) SOAP(payload interface{}) ([]byte, error) {
 		return nil, err
 	}
 
-	url := buildWsdlURL(w.config.Service, w.config.Environment)
+	url := buildWsdlURL(w.config)
 
 	client := http.Client{
 		Timeout: time.Duration(50 * time.Second),
@@ -56,7 +56,10 @@ func (w *Webpay) SOAP(payload interface{}) ([]byte, error) {
 	return b, nil
 }
 
-func buildWsdlURL(environment string, service string) string {
+func buildWsdlURL(c *configuration) string {
+	environment := c.Environment
+	service := c.Service
+
 	e := ""
 	switch environment {
 	case EnvironmentIntegration, EnvironmentTest, EnvironmentCertification:
