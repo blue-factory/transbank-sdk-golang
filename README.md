@@ -9,7 +9,7 @@ Implementación de SDK no ofical para Golang.
 # Instalación
 
 ```bash
-go get -v github.com/microapis/transbank-sdk-golang
+go get -v github.com/microapis/transbank-sdk-golang/pkg/webpay
 ```
 
 # Documentación
@@ -19,15 +19,16 @@ Puedes ver la documentación generada en [pkg.go.dev](https://pkg.go.dev/github.
 # Uso
 
 ```golang
+import "github.com/microapis/transbank-sdk-golang/pkg/webpay"
+
 amount := float64(1000)
 sessionID := "mi-id-de-sesion"
 buyOrder := strconv.Itoa(rand.Intn(99999))
 returnURL := "https://callback/resultado/de/transaccion"
 finalURL := "https://callback/final/post/comprobante/webpay"
 
-w := webpay.NewIntegrationPlusNormal()
-
-transaction, err := service.GetPlusNormal(w).InitTransaction(amount, sessionID, buyOrder, returnURL, finalURL)
+service := webpay.NewIntegrationPlusNormal()
+transaction, err := service.InitTransaction(amount, sessionID, buyOrder, returnURL, finalURL)
 if err != nil {
   log.Fatalln(err)
 }
@@ -57,4 +58,3 @@ go test
 - [ ] One Click Nullify: ...
 - [ ] SOAP: verificar si la firma del XML en la respuesta es válida con los certificados designados.
 - [x] SOAP: soporte a los posibles errores que pueda devolver el servidor.
-- [ ] HTTP: implementar base de trabajo para la API Rest convivendo junto a SOAP.
