@@ -20,7 +20,7 @@ func main() {
 	w := webpay.New(c)
 	t := service.GetPlusNormal(w)
 
-	res, err := t.InitTransaction(service.ParamsPlusNormal{
+	transaction, err := t.InitTransaction(service.ParamsPlusNormal{
 		Amount:    amount,
 		SessionID: sessionID,
 		BuyOrder:  buyOrder,
@@ -31,6 +31,6 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	log.Println("URL", res.URL)
-	log.Println("Token", res.Token)
+	log.Println("URL", transaction.URL)
+	log.Println("Token", transaction.Token)
 }
