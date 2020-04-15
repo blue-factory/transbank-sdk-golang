@@ -49,7 +49,7 @@ go test
 # Tareas Pendientes
 
 - [x] Plus Normal: implementar método `InitTransaction` con SOAP.
-- [ ] Plus Normal: implementar método `GetTransactionResult` con SOAP.
+- [x] Plus Normal: implementar método `GetTransactionResult` con SOAP.
 - [ ] Plus Mall: ...
 - [ ] Patpass: implementar método para crear transacción con HTTP.
 - [ ] Patpass: implementar método para confirmar transacción con HTTP.
@@ -57,5 +57,6 @@ go test
 - [ ] One Click Mall: ...
 - [ ] One Click Capture: ...
 - [ ] One Click Nullify: ...
-- [ ] SOAP: verificar si la firma del XML en la respuesta es válida con los certificiados designados.
+- [ ] SOAP: verificar si la firma del XML en la respuesta es válida con los certificados designados.
+- [x] SOAP: soporte a los posibles errores que pueda devolver el servidor.
 - [ ] HTTP: implementar base de trabajo para la API Rest convivendo junto a SOAP.
