@@ -1,79 +1,34 @@
 package webpay
 
-import (
-	"errors"
-	"fmt"
-
-	"github.com/microapis/transbank-sdk-golang/pkg/configuration"
-)
-
-const (
-	environmentIntegration   = "integration"
-	environmentCertification = "certification"
-	environmentTest          = "test"
-	environmentLive          = "live"
-	environmentProduction    = "production"
-
-	serviceNormal       = "normal"
-	serviceMallNormal   = "mallNormal"
-	serviceCapture      = "capture"
-	serviceNullify      = "nullify"
-	serviceOneClick     = "oneClick"
-	serviceOneClickMall = "oneClickMall"
-)
-
-// Webpay ...
+// Webpay holds configuration that will be used by the services `service`
 type Webpay struct {
-	Config configuration.Configuration
-
-	service     string
-	environment string
-	wsdlURL     string
+	config *configuration
 }
 
-// New ...
-func New(c configuration.Configuration) *Webpay {
+func (w *Webpay) GetCommerceCode() int64 {
+	return w.config.CommerceCode
+}
+
+// New returns a configured Webpay instance
+func New(privateCert, publicCert string, commerceCode int64, commerceEmail, service, environment string) (*Webpay, error) {
+	c, err := newConfiguration(privateCert, publicCert, commerceCode, commerceEmail, service, environment)
+	if err != nil {
+		return nil, err
+	}
+
+	return new(c), nil
+}
+
+// NewIntegrationPlusNormal returns a configured Webpay instance that will use
+// the integration environment
+func NewIntegrationPlusNormal() *Webpay {
+	return new(getIntegrationPlusNormal())
+}
+
+func new(c *configuration) *Webpay {
 	w := &Webpay{
-		Config:      c,
-		service:     serviceNormal,
-		environment: environmentIntegration,
-		wsdlURL:     buildWsdlURL(environmentIntegration, serviceNormal),
+		config: c,
 	}
 
 	return w
-}
-
-// SetConfiguration ...
-func (w *Webpay) SetConfiguration(c configuration.Configuration) {
-	w.Config = c
-}
-
-// SetService ...
-func (w *Webpay) SetService(service string) error {
-	switch service {
-	case serviceCapture, serviceMallNormal, serviceNormal, serviceNullify, serviceOneClick, serviceOneClickMall:
-		w.service = service
-	default:
-		err := fmt.Sprintf("invalid service value: %v", service)
-		return errors.New(err)
-	}
-
-	w.wsdlURL = buildWsdlURL(w.environment, w.service)
-
-	return nil
-}
-
-// SetEnvironment ...
-func (w *Webpay) SetEnvironment(environment string) error {
-	switch environment {
-	case environmentCertification, environmentIntegration, environmentLive, environmentProduction, environmentTest:
-		w.environment = environment
-	default:
-		err := fmt.Sprintf("invalid environment value: %v", environment)
-		return errors.New(err)
-	}
-
-	w.wsdlURL = buildWsdlURL(w.environment, w.service)
-
-	return nil
 }

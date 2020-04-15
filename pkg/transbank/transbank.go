@@ -1,7 +1,8 @@
 package transbank
 
 const (
-	// TransbankIntegrationCert ...
+	// TransbankIntegrationCert stores the certificate to verify the SOAP
+	// responses of the integration environment
 	TransbankIntegrationCert = `-----BEGIN CERTIFICATE-----
 MIIEDzCCAvegAwIBAgIJAMaH4DFTKdnJMA0GCSqGSIb3DQEBCwUAMIGdMQswCQYD
 VQQGEwJDTDERMA8GA1UECAwIU2FudGlhZ28xETAPBgNVBAcMCFNhbnRpYWdvMRcw
@@ -27,7 +28,8 @@ R48O6P0ZpWLlZwScyqDWcsg/4wNCL5Kaa5VgM03SKM6XoWTzkT7p0t0FPZVoGCyG
 MX5lzVXafBH/sPd545fBH2J3xAY3jtP764G4M8JayOFzGB0=
 -----END CERTIFICATE-----`
 
-	// TransbankCert ...
+	// TransbankCert stores the certificate to verify the SOAP responses of the
+	// production environment
 	TransbankCert = `-----BEGIN CERTIFICATE-----
 MIIDizCCAnOgAwIBAgIJAIXzFTyfjyBkMA0GCSqGSIb3DQEBCwUAMFwxCzAJBgNV
 BAYTAkNMMQswCQYDVQQIDAJSTTERMA8GA1UEBwwIU2FudGlhZ28xEjAQBgNVBAoM

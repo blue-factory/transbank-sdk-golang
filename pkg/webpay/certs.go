@@ -1,10 +1,7 @@
-package configuration
+package webpay
 
-// GetIntegrationPlusNormal ...
-func GetIntegrationPlusNormal() Configuration {
-	return Configuration{
-		CommerceCode: 597020000540,
-		PrivateCert: `-----BEGIN RSA PRIVATE KEY-----
+const (
+	integrationPlusNormalPrivateCert = `-----BEGIN RSA PRIVATE KEY-----
 MIIEowIBAAKCAQEAvuNgBxMAOBlNI7Fw5sHGY1p6DB6EMK83SL4b1ZILSJs/8/MC
 X8Pkys3CvJmSIiKU7fnWkgXchEdqXJV+tzgoED/y99tXgoMssi0ma+u9YtPvpT7B
 a5rk5HpLuaFNeuE3l+mpkXDZZKFSZJ1fV/Hyn3A1Zz+7+X2qiGrAWWdjeGsIkz4r
@@ -30,8 +27,8 @@ xwg1xCYEWZS3l1OXRVgqm/C4BfPbhmZT3/FxRMrigUZo7a6DYn/drH56b+KBWGpO
 BGegAQKBgGY7Ikdw288DShbEVi6BFjHKDej3hUfsTwncRhD4IAgALzaatuta7JFW
 NrGTVGeK/rE6utA/DPlP0H2EgkUAzt8x3N0MuVoBl/Ow7y5sqIQKfEI7h0aRdXH5
 ecefOL6iiJWQqX2+237NOd0fJ4E1+BCMu/+HnyCX+cFM2FgoE6tC
------END RSA PRIVATE KEY-----`,
-		PublicCert: `-----BEGIN CERTIFICATE-----
+-----END RSA PRIVATE KEY-----`
+	integrationPlusNormalPublicCert = `-----BEGIN CERTIFICATE-----
 MIIDeDCCAmACCQDjtGVIe/aeCTANBgkqhkiG9w0BAQsFADB+MQswCQYDVQQGEwJj
 bDENMAsGA1UECAwEc3RnbzENMAsGA1UEBwwEc3RnbzEMMAoGA1UECgwDdGJrMQ0w
 CwYDVQQLDARjY3JyMRUwEwYDVQQDDAw1OTcwMjAwMDA1NDAxHTAbBgkqhkiG9w0B
@@ -51,15 +48,9 @@ p/3Sb1e9FABJhZkAQU2KGMot/b/ncePKHvfSBzQCwbuXWPzrF+B/4ZxGMAkgxtmK
 WnWrkcr2qakpHzERn8irKBPhvlifW5sdMH4tz/4SLVwkek24Sp8CVmIIgQR3nyR9
 8hi1+Iz4O1FcIQtx17OvhWDXhfEsG0HWygc5KyTqCkVBClVsJPRvoCSTORvukcuW
 18gbYO3VlxwXnvzLk4aptC7/8Jq83XY8o0fn+A==
------END CERTIFICATE-----`,
-	}
-}
+-----END CERTIFICATE-----`
 
-// GetIntegrationPlusMall ...
-func GetIntegrationPlusMall() Configuration {
-	return Configuration{
-		CommerceCode: 597044444401,
-		PrivateCert: `-----BEGIN RSA PRIVATE KEY-----
+	integrationPlusMallPrivateCert = `-----BEGIN RSA PRIVATE KEY-----
 MIIEowIBAAKCAQEAq5x8P9EIq8xT6UtRAL6pmNpcgYuIXHUvtPuY+Ao28LtbsJQV
 gPXJ2CrMYtq3GH1kPAajdF0tdfMOSQgxTnnWsMFdY6jel2vhF1vfKvm79yLMrqIR
 X7l/fZbldWJdoSuq1b3xTPYBKKGFhe/SvYpO88dvOuH4WIiAfRT1gFXkEW9xyA70
@@ -85,8 +76,8 @@ VakEOr79ePy8Jrn0xt6Yu8Yq8JTzvqKHEGZ8ptFVz/6GSqeaQ02ZWtZauDOHSQt6
 wnGnnwKBgFbTBEwXl89uZZ/25z1mA5D9nqHTj/A0GYc9762xc/bvkvi59DeYbNSH
 J7jKHS50kE4sS/E4p7e9/G4jZTe/nvEsstfFZprRF31xlVY9Y/1OPysGYIJPOTAg
 EBEKSypPpswFcn/jSeIGii7aEb5h6OyNpnSMbBvFxhhUJ1PPpUQG
------END RSA PRIVATE KEY-----`,
-		PublicCert: `-----BEGIN CERTIFICATE-----
+-----END RSA PRIVATE KEY-----`
+	integrationPlusMallPublicCert = `-----BEGIN CERTIFICATE-----
 MIIDrDCCApQCCQCDHU0/ZL/yojANBgkqhkiG9w0BAQsFADCBlzELMAkGA1UEBhMC
 Y2wxEzARBgNVBAgMClNvbWUtU3RhdGUxETAPBgNVBAcMCHNhbnRpYWdvMSEwHwYD
 VQQKDBhJbnRlcm5ldCBXaWRnaXRzIFB0eSBMdGQxFTATBgNVBAMMDDU5NzA0NDQ0
@@ -107,15 +98,9 @@ nPWeuhAgBUfNK3rZ+qIz1FyrzYUTPcK0BzStbpdclb+LEh7I0wTegSj7skctm8M2
 BQmFaS67DUmr0ReI4ZHvWMkDjqjlK8mzx0f7nOdarq3Cxhg3QMqOilfGtvrZrtos
 q8/WPGded+bP8kBZ2Rs6oUEBBQfVnAPI50YRXZJjyAzqSwx8MhFztAgE/LaYbvZs
 xNB2I18V5oNmOCXHhfqneSstxMBWt3W8rd/0+JSfWLc=
------END CERTIFICATE-----`,
-	}
-}
+-----END CERTIFICATE-----`
 
-// GetIntegrationPlusCapture ...
-func GetIntegrationPlusCapture() Configuration {
-	return Configuration{
-		CommerceCode: 597044444404,
-		PrivateCert: `-----BEGIN RSA PRIVATE KEY-----
+	integrationPlusCapturePrivateCert = `-----BEGIN RSA PRIVATE KEY-----
 MIIEpQIBAAKCAQEAq62F11DVV2ciL/S/zKr8NmesZNUoI3t/9EbZ5m97LjH/R1s2
 0MxJWjmy0f+I64PvJkGOvQauBdJoGiiCeiV3qY+PppgOQmMo8xXaPzErrVr0F9bx
 3gbqSuqi/uwJNJRWUs3tYmlQ/WQrKHSMxpRkVthWoIpyR3UEBpr9N9MhAdDarJCv
@@ -141,8 +126,8 @@ u72OntVpREBYxVrgSuZQPSrcObvD015lNEZ+8ISnRGhek+eZwETT857yxGYXPrN0
 LVF7vnsCgYEApWvaUImePJDN50+nExK6TWHGFNnlZPlqFuyEHCSIlC0moGkcdl1D
 uILlje5JjmCI6hUreePcpFbyuiWcFcRJPdTgPWAcuWpPqFk3TyMVg8RQjZ4nIb4e
 TB3lRTP7u4t4emHHeNZhSeakRMOUYWiylCgSLmmf1OKd/bWTQ6G7lk0=
------END RSA PRIVATE KEY-----`,
-		PublicCert: `-----BEGIN CERTIFICATE-----
+-----END RSA PRIVATE KEY-----`
+	integrationPlusCapturePublicCert = `-----BEGIN CERTIFICATE-----
 MIIDrDCCApQCCQDxS6RHDwxUnjANBgkqhkiG9w0BAQsFADCBlzELMAkGA1UEBhMC
 Q0wxEzARBgNVBAgMClNvbWUtU3RhdGUxETAPBgNVBAcMCHNhbnRpYWdvMSEwHwYD
 VQQKDBhJbnRlcm5ldCBXaWRnaXRzIFB0eSBMdGQxFTATBgNVBAMMDDU5NzA0NDQ0
@@ -163,15 +148,9 @@ Z/EITwHYhfl9cmuVQFC09AQC/3brrP62fYzKP03CkGrxfVFP0Q0eLzP3w8x4XMzG
 9VmMMHFICFYEEyUiQT22X8SpFtUakNCfJzK65zXGAxJqZKTVYhjcYB+HBIAqitGS
 hF+F68G9XN7twijNIuseJt/I98R7UazON7EeP7kAz/UylVNOVmYq+pQbU4fG9QjQ
 CZ8F118V03v3IQYXwTmOHge9moBwyTkcnI5nql346jg=
------END CERTIFICATE-----`,
-	}
-}
+-----END CERTIFICATE-----`
 
-// GetIntegrationOneClickNormal ...
-func GetIntegrationOneClickNormal() Configuration {
-	return Configuration{
-		CommerceCode: 597044444405,
-		PrivateCert: `-----BEGIN RSA PRIVATE KEY-----
+	integrationOneClickNormalPrivateCert = `-----BEGIN RSA PRIVATE KEY-----
 MIIEpAIBAAKCAQEA48S877GUtjlYrqIQDlZAMqg5kfNrrZlCZckC1LGzCfcPu7Lm
 za2c2F1Q7zKELqVTo1wuZUS1inhYmtg4PexDKak/uryARR3uy2kqq3yG3IQNIdQY
 RpAUl8SvNyJvUVtA0N6nwjaqsTv1EacOLsfR+9HNvRXaWSitXNFa7i2G0iN/pnXb
@@ -197,8 +176,8 @@ KWZ1ctU/dRIycxCFpb6dem3rtt7BHUenCBkIvSDDdGeSpfBAFmHtSqB8ElMSt9v2
 otzkO68CgYBhIDz4rTMuOxmt9yily7rcd9J7RrbC7hPHMjM5EwPyOmawAYjTRM8X
 rxe1w4MtKrXxn11EncMJuH0hLQ12MwmrTui7gllTi8IPkfe+e7yhgHzzB5Mnhax0
 92jL5rYiTenvy/wIjmF3TDHwyX6dB6QuozltdYBE2rv/oXOrE19qCQ==
------END RSA PRIVATE KEY-----`,
-		PublicCert: `-----BEGIN CERTIFICATE-----
+-----END RSA PRIVATE KEY-----`
+	integrationOneClickNormalPublicCert = `-----BEGIN CERTIFICATE-----
 MIIDrDCCApQCCQCLlKISnBv1OTANBgkqhkiG9w0BAQsFADCBlzELMAkGA1UEBhMC
 Y2wxEzARBgNVBAgMClNvbWUtU3RhdGUxETAPBgNVBAcMCHNhbnRpYWdvMSEwHwYD
 VQQKDBhJbnRlcm5ldCBXaWRnaXRzIFB0eSBMdGQxFTATBgNVBAMMDDU5NzA0NDQ0
@@ -219,15 +198,9 @@ dr3/TFb9Fc37WIMFoKsG2tnEXhLZxaahglEDdBcoL+I78K+JFtL92N7+Sns5zAmy
 DDKf/7bKvTBF5vXQzgYWkrGFweppVU1xfgCn5KFdqQSJZzvcu1xuCRSngLbcpBEW
 JlzTNzZ7K+siy5V9cKQtUW3h/KyMeP9KCE0YUnXvtiGr2yeqUviUAqDiSzcCmQDR
 XE4/CA2Yzlv/+n9JVsvFBTAyIvYfG3mqr8KdkL238sc=
------END CERTIFICATE-----`,
-	}
-}
+-----END CERTIFICATE-----`
 
-// GetIntegrationPatpassByNormal ...
-func GetIntegrationPatpassByNormal() Configuration {
-	return Configuration{
-		CommerceCode: 597020000548,
-		PrivateCert: `-----BEGIN RSA PRIVATE KEY-----
+	integrationPatpassNormalPrivateCert = `-----BEGIN RSA PRIVATE KEY-----
 MIIEpQIBAAKCAQEA0t4cnHnAr/05KYwk+2ziYKUAxk/E0LhpG8KSyJp9Kl1G09I8
 xBhSnF23XpEm6grgKmxzbGtj8t8u9P54sNxNrcs0tawV0qHfzsS63hAJ1254LeZA
 uTVpWXUnEl4DWI9Pq67OWUovUPL/mQzcZBJShspC6zX0unfWRnoDeNtx07aj/xq0
@@ -253,8 +226,8 @@ y/7KfKL5o1wwo63FS3D4VXhGbKx1kk3vspMF9ROdGLGh1Poa2bD6Y8k2kaV1VVAn
 rR6UNN0CgYEAgWw0NRz9X3V5K0WfrXnqBEvDiJ9MnsO3Y0SmV+zbTVYQ2zf2iYT+
 Wp4Tpjfc2k8s1dU33YnsrLaecB3gEFeEHJdN9qOPkk/yElVrcCKfFEUmPu7wvHZI
 yCLqC4NXGoXossGlQ2XPCSYacEQ5JJTtv+sBufhJZTwuqEBSGS7PurA=
------END RSA PRIVATE KEY-----`,
-		PublicCert: `-----BEGIN CERTIFICATE-----
+-----END RSA PRIVATE KEY-----`
+	integrationPatpassNormalPublicCert = `-----BEGIN CERTIFICATE-----
 MIIDujCCAqICCQDHWKiW6dFYqjANBgkqhkiG9w0BAQsFADCBnjELMAkGA1UEBhMC
 Q0wxETAPBgNVBAgMCFNhbnRpYWdvMRIwEAYDVQQKDAlUcmFuc2JhbmsxETAPBgNV
 BAcMCFNhbnRpYWdvMRUwEwYDVQQDDAw1OTcwMjAwMDA1NDgxFzAVBgNVBAsMDkNh
@@ -275,6 +248,5 @@ af3/8znCxiTqvJdo4r3sp6nZV2m6zjicQwJ3aWFP8mqeTsyG3rMZBin0QaDoYCM+
 5qVZhQBycggsPMPnZ3fvBIslWCd6JBPYZ4agXNLdAsTmxYxjpuyOM+qTN9hdYdzb
 jaJ/IVa8NZrrSZU6BxooybSHNJ5+x0dc9Q/6A7txTnjTj8Iy9gfjokXRgpADpFq9
 mnf2hxewHnOGRcfAHBgS6vrpuAJ7/yIMewcMtu09ukFY7/d23CDPGVisDdDJwA==
------END CERTIFICATE-----`,
-	}
-}
+-----END CERTIFICATE-----`
+)

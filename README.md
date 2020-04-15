@@ -14,22 +14,20 @@ go get -v github.com/microapis/transbank-sdk-golang
 
 # Documentación
 
-Puedes ver la documentación generada en [godoc](https://godoc.org/github.com/microapis/transbank-skd-golang) para ver la implementación de la librería. Tambien puedes consultar la [documentación oficial](https://www.transbankdevelopers.cl/documentacion/como_empezar).
+Puedes ver la documentación generada en [pkg.go.dev](https://pkg.go.dev/github.com/microapis/transbank-sdk-golang?tab=doc) para ver la implementación de la librería. Tambien puedes consultar la [documentación oficial](https://www.transbankdevelopers.cl/documentacion/como_empezar).
 
 # Uso
 
 ```golang
-c := configuration.GetIntegrationPlusNormal()
-w := webpay.New(c)
-s := service.GetPlusNormal(w)
+amount := float64(1000)
+sessionID := "mi-id-de-sesion"
+buyOrder := strconv.Itoa(rand.Intn(99999))
+returnURL := "https://callback/resultado/de/transaccion"
+finalURL := "https://callback/final/post/comprobante/webpay"
 
-transaction, err := s.InitTransaction(service.ParamsPlusNormal{
-  Amount:    float64(1000),
-  SessionID: "mi-id-de-sesion",
-  BuyOrder:  int64(rand.Intn(9999999)),
-  ReturnURL: "https://callback/resultado/de/transaccion",
-  FinalURL:  "https://callback/final/post/comprobante/webpay",
-})
+w := webpay.NewIntegrationPlusNormal()
+
+transaction, err := service.GetPlusNormal(w).InitTransaction(amount, sessionID, buyOrder, returnURL, finalURL)
 if err != nil {
   log.Fatalln(err)
 }
