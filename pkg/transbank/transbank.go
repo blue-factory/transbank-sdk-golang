@@ -52,3 +52,43 @@ vpidobGqTGvZtxRV5axer69WY0rAXRhTSfkvyGTXERCJ3vdsF/v9iNKHhERUnpV6
 KDrfvgD9uqWH12/89hfsfVN6iRH9UOE+SKoR/jHtvLMhVHpa80HVK1qdlfqUTZo=
 -----END CERTIFICATE-----`
 )
+
+// PlusNormal define all plus normal service method
+type PlusNormal interface {
+	InitTransaction(amount float64, sessionID, buyOrder, returnURL, finalURL string) (*ResponsePlusNormalInitTransaction, error)
+	GetTransactionResult(token string) (*ResponsePlusNormalTransactionResult, error)
+}
+
+// ResponsePlusNormalInitTransaction represents the "initTransactionResponse" SOAP server response
+type ResponsePlusNormalInitTransaction struct {
+	URL   string `json:"url"`
+	Token string `json:"token"`
+}
+
+// ResponsePlusNormalTransactionResult represents the "getTransactionResultResponse" SOAP server response
+type ResponsePlusNormalTransactionResult struct {
+	AccountingDate  string       `json:"accounting_date"`
+	BuyOrder        string       `json:"buy_order"`
+	CardDetail      CardDetail   `json:"card_detail"`
+	DetailOutput    DetailOutput `json:"detail_output"`
+	SessionID       string       `json:"session_id"`
+	TransactionDate string       `json:"transaction_date"`
+	URLRedirection  string       `json:"url_redirection"`
+	VCI             string       `json:"vci"`
+}
+
+// CardDetail represent the values of customer card
+type CardDetail struct {
+	CardNumber string `json:"card_number"`
+}
+
+// DetailOutput represent transaction details values
+type DetailOutput struct {
+	SharesNumber      int     `json:"shares_number"`
+	Amount            float64 `json:"amount"`
+	CommerceCode      string  `json:"commerce_code"`
+	BuyOrder          string  `json:"buy_order"`
+	AuthorizationCode string  `json:"authorization_code"`
+	PaymentTypeCode   string  `json:"payment_type_code"`
+	ResponseCode      string  `json:"response_code"`
+}
