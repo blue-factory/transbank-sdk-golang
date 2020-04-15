@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"math/rand"
+	"strconv"
 
 	"github.com/microapis/transbank-sdk-golang/pkg/configuration"
 	"github.com/microapis/transbank-sdk-golang/pkg/service"
@@ -12,15 +13,15 @@ import (
 func main() {
 	amount := float64(1000)
 	sessionID := "mi-id-de-sesion"
-	buyOrder := int64(rand.Intn(9999999))
+	buyOrder := strconv.Itoa(rand.Intn(99999))
 	returnURL := "https://callback/resultado/de/transaccion"
 	finalURL := "https://callback/final/post/comprobante/webpay"
 
 	c := configuration.GetIntegrationPlusNormal()
 	w := webpay.New(c)
-	t := service.GetPlusNormal(w)
+	s := service.GetPlusNormal(w)
 
-	transaction, err := t.InitTransaction(service.ParamsPlusNormal{
+	transaction, err := s.InitTransaction(service.ParamsPlusNormal{
 		Amount:    amount,
 		SessionID: sessionID,
 		BuyOrder:  buyOrder,
