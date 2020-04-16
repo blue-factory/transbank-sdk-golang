@@ -1,9 +1,5 @@
 package webpay
 
-import (
-	"github.com/microapis/transbank-sdk-golang/pkg/transbank"
-)
-
 // Webpay holds configuration that will be used by the services `service`
 type Webpay struct {
 	config *configuration
@@ -21,14 +17,6 @@ func New(privateCert, publicCert string, commerceCode int64, commerceEmail, serv
 	}
 
 	return new(c), nil
-}
-
-// NewIntegrationPlusNormal returns a configured Webpay instance that will use
-// the integration environment
-func NewIntegrationPlusNormal() transbank.PlusNormal {
-	return &plusNormal{
-		webpay: new(getIntegrationPlusNormal()),
-	}
 }
 
 func new(c *configuration) *Webpay {
