@@ -62,3 +62,7 @@ Puedes ver más ejemplos sobre la implementación de los demás servicios en `/c
 - [ ] Nullify: implementar métodos para Nullify usando SOAP/HTTP.
 - [ ] Nullify: implementar tests para Nullify usando SOAP/HTTP.
 - [ ] API Rest: implementar package http para montar un webservice usando un docker.
+
+# Licencia
+
+GNU General Public License v3.0 [`ver`](./LICENSE.txt)
