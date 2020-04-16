@@ -22,7 +22,7 @@ func main() {
 	}
 	token := string(os.Args[1])
 
-	service, err := webpay.NewPlusNormal(privateCert, publicCert, commerceCode, commerceEmail, webpayService, webpayEnvironment)
+	service, err := webpay.NewPatpass(privateCert, publicCert, commerceCode, commerceEmail, webpayService, webpayEnvironment)
 	if err != nil {
 		log.Fatalln(err)
 	}

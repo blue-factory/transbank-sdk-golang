@@ -36,7 +36,7 @@ func main() {
 	commerceMail := "contacto@comercio.cl"
 	ufFlag := false
 
-	service, err := webpay.NewPlusNormal(privateCert, publicCert, commerceCode, commerceEmail, webpayService, webpayEnvironment)
+	service, err := webpay.NewPatpass(privateCert, publicCert, commerceCode, commerceEmail, webpayService, webpayEnvironment)
 	if err != nil {
 		log.Fatalln(err)
 	}
