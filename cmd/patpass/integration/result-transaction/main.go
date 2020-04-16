@@ -2,21 +2,24 @@ package main
 
 import (
 	"log"
+	"os"
 
 	"github.com/microapis/transbank-sdk-golang/pkg/webpay"
 )
 
 func main() {
-	token := "ec3ff8ef147754ce4ce82700cb90faebefc3841715716d364988297b019d4e47"
+	if len(os.Args) < 2 {
+		log.Fatalln("missing token arg")
+	}
+	token := string(os.Args[1])
 
-	service := webpay.NewIntegrationPlusNormal()
+	service := webpay.NewIntegrationPatpass()
 	result, err := service.GetTransactionResult(token)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
 	log.Println("AccountingDate", result.AccountingDate)
-	log.Println("BuyOrder", result.BuyOrder)
 	log.Println("BuyOrder", result.BuyOrder)
 	log.Println("CardDetail.CardNumber", result.CardDetail.CardNumber)
 	log.Println("DetailOutput.SharesNumber", result.DetailOutput.SharesNumber)

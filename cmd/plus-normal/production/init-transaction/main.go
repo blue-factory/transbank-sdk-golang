@@ -5,15 +5,15 @@ import (
 	"math/rand"
 	"strconv"
 
-	"github.com/microapis/transbank-sdk-golang/pkg/service"
+	"github.com/microapis/transbank-sdk-golang"
 	"github.com/microapis/transbank-sdk-golang/pkg/webpay"
 )
 
 const (
-	privateCert       = "..."
-	publicCert        = "..."
+	privateCert       = "private_cert_str"
+	publicCert        = "public_cert_str"
 	commerceCode      = 0
-	commerceEmail     = "..."
+	commerceEmail     = "commerce_email"
 	webpayService     = webpay.ServiceNormal
 	webpayEnvironment = webpay.EnvironmentProduction
 )
@@ -25,12 +25,18 @@ func main() {
 	returnURL := "https://callback/resultado/de/transaccion"
 	finalURL := "https://callback/final/post/comprobante/webpay"
 
-	w, err := webpay.New(privateCert, publicCert, commerceCode, commerceEmail, webpayService, webpayEnvironment)
+	service, err := webpay.NewPlusNormal(privateCert, publicCert, commerceCode, commerceEmail, webpayService, webpayEnvironment)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalln(err)
 	}
 
-	transaction, err := service.GetPlusNormal(w).InitTransaction(amount, sessionID, buyOrder, returnURL, finalURL)
+	transaction, err := service.InitTransaction(transbank.ParamsPlusNormalInitTransaction{
+		Amount:    amoun,
+		SessionID: sessionID,
+		BuyOrder:  buyOrder,
+		ReturnURL: returnURL,
+		FinalURL, finalURL,
+	})
 	if err != nil {
 		log.Fatalln(err)
 	}
