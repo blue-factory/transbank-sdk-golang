@@ -37,28 +37,6 @@ log.Println(transaction.URL) // https://webpay3gint.transbank.cl/webpayserver/in
 log.Println(transaction.Token) // e95675887afd8c5ad7d7e146468452fc4bc896541688c78cd781ded0ddef0260
 ```
 
-## Obtener Resultado de la Transacción con Webpay Patpass (Producción)
-
-```golang
-service, err := webpay.NewPlusNormal(privateCert, publicCert, commerceCode, commerceEmail, webpay.ServicePatpass, webpay.EnvironmentProduction)
-if err != nil {
-  log.Fatalln(err)
-}
-
-result, err := service.GetTransactionResult(token)
-if err != nil {
-  log.Fatalln(err)
-}
-
-log.Println("BuyOrder", result.BuyOrder) // ordenCompra12345678
-log.Println("CardDetail.CardNumber", result.CardDetail.CardNumber) // 0568
-...
-log.Println("DetailOutput.Amount", result.DetailOutput.Amount) // 10000
-log.Println("DetailOutput.ResponseCode", result.DetailOutput.ResponseCode) // -1
-...
-log.Println("VCI", result.VCI) // TSN
-```
-
 Puedes ver más ejemplos sobre la implementación los demás servicios en la carpeta `/cmd`
 
 # Testing (WIP)
