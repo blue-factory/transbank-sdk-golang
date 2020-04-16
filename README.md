@@ -14,7 +14,7 @@ go get -v github.com/microapis/transbank-sdk-golang/pkg/webpay
 
 # Documentación
 
-Puedes ver la documentación generada en [pkg.go.dev](https://pkg.go.dev/github.com/microapis/transbank-sdk-golang?tab=doc) para ver la implementación de la librería. Tambien puedes consultar la [documentación oficial](https://www.transbankdevelopers.cl/documentacion/como_empezar).
+Puedes ver la documentación generada en [pkg.go.dev](https://pkg.go.dev/github.com/microapis/transbank-sdk-golang?tab=doc) para ver la implementación de la librería. También puedes consultar la [documentación oficial](https://www.transbankdevelopers.cl/documentacion/como_empezar).
 
 # Ejemplos
 
@@ -64,8 +64,22 @@ Puedes ver más ejemplos sobre la implementación los demás servicios en la car
 # Testing (WIP)
 
 ```bash
-go test
+make test
 ```
+
+# Montar WebService API HTTP con Docker (WIP)
+
+También es posible correr con Docker un servidor HTPP que expone las siguientes rutas.
+
+```
+  POST /api/v1/plus-normal/transactions
+  GET  /api/v1/plus-normal/transactions/:token
+
+  POST /api/v1/patpass/transactions
+  GET  /api/v1/patpass/transactions/:token
+```
+
+Para ello solo debes usar la imagen de docker `microapis/webpay-api`.
 
 # Tareas Pendientes
 
