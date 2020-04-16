@@ -39,28 +39,6 @@ log.Println(transaction.Token) // e95675887afd8c5ad7d7e146468452fc4bc896541688c7
 
 Puedes ver más ejemplos sobre la implementación los demás servicios en la carpeta `/cmd`
 
-# Testing (WIP)
-
-Para correr los test puedes hacer uso de `go test` o bien recomendamos usar el comando definido en el `Makefile`.
-
-```bash
-make test
-```
-
-# Montar WebService API HTTP con Docker (WIP)
-
-También es posible correr con Docker un servidor HTPP que expone las siguientes rutas.
-
-```
-  POST /api/v1/plus-normal/transactions
-  GET  /api/v1/plus-normal/transactions/:token
-
-  POST /api/v1/patpass/transactions
-  GET  /api/v1/patpass/transactions/:token
-```
-
-Para ello solo debes usar la imagen de docker `docker pull microapis/webpay-api:latest`.
-
 # Tareas Pendientes
 
 - [x] SOAP: soporte a los posibles errores que pueda devolver el servidor.
@@ -83,4 +61,4 @@ Para ello solo debes usar la imagen de docker `docker pull microapis/webpay-api:
 - [ ] Capture: implementar tests para Capture usando SOAP/HTTP.
 - [ ] Nullify: implementar métodos para Nullify usando SOAP/HTTP.
 - [ ] Nullify: implementar tests para Nullify usando SOAP/HTTP.
-- [W] API Rest: implementar package http para montar un webservice usando un docker.
+- [ ] API Rest: implementar package http para montar un webservice usando un docker.
