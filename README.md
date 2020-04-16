@@ -16,7 +16,7 @@ go get -v github.com/microapis/transbank-sdk-golang/pkg/webpay
 
 Puedes ver la documentación generada en [pkg.go.dev](https://pkg.go.dev/github.com/microapis/transbank-sdk-golang?tab=doc) para ver la implementación de la librería. También puedes consultar la [documentación oficial](https://www.transbankdevelopers.cl/documentacion/como_empezar).
 
-# Uso
+# Ejemplo
 
 ## Iniciar Transacción con Webpay Plus Normal (Integración)
 
