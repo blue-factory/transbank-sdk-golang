@@ -18,7 +18,7 @@ type plusNormal struct {
 }
 
 // NewPlusNormal returns a Webpay Plus Normal with respective configuration
-func NewPlusNormal(privateCert, publicCert string, commerceCode int64, commerceEmail, service, environment string) (transbank.PlusNormal, error) {
+func NewPlusNormal(privateCert, publicCert string, commerceCode int64, commerceEmail, service, environment string) (transbank.Transaction, error) {
 	w, err := New(privateCert, publicCert, commerceCode, commerceEmail, service, environment)
 	if err != nil {
 		return nil, err
@@ -31,7 +31,7 @@ func NewPlusNormal(privateCert, publicCert string, commerceCode int64, commerceE
 
 // NewIntegrationPlusNormal returns a configured Webpay instance that will use
 // the integration environment
-func NewIntegrationPlusNormal() transbank.PlusNormal {
+func NewIntegrationPlusNormal() transbank.Transaction {
 	return &plusNormal{
 		webpay: new(getIntegrationPlusNormal()),
 	}

@@ -28,15 +28,14 @@ func main() {
 	ufFlag := false
 
 	service := webpay.NewIntegrationPatpass()
-	transaction, err := service.InitTransaction(transbank.InitTransactionPatpass{
-		Base: transbank.InitTransaction{
-			Amount:    amount,
-			SessionID: sessionID,
-			BuyOrder:  buyOrder,
-			ReturnURL: returnURL,
-			FinalURL:  finalURL,
-		},
-		WPMDetail: transbank.WPMDetail{
+	transaction, err := service.InitTransaction(transbank.InitTransaction{
+		Amount:    amount,
+		SessionID: sessionID,
+		BuyOrder:  buyOrder,
+		ReturnURL: returnURL,
+		FinalURL:  finalURL,
+
+		WPMDetail: &transbank.WPMDetail{
 			ServiceID:           serviceID,
 			CardHolderID:        cardHolderID,
 			CardHolderName:      cardHolderName,

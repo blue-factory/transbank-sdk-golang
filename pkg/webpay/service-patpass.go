@@ -15,7 +15,7 @@ type patpass struct {
 }
 
 // NewPatpass returns a Webpay Plus Normal with respective configuration
-func NewPatpass(privateCert, publicCert string, commerceCode int64, commerceEmail, service, environment string) (transbank.Patpass, error) {
+func NewPatpass(privateCert, publicCert string, commerceCode int64, commerceEmail, service, environment string) (transbank.Transaction, error) {
 	w, err := New(privateCert, publicCert, commerceCode, commerceEmail, service, environment)
 	if err != nil {
 		return nil, err
@@ -28,14 +28,14 @@ func NewPatpass(privateCert, publicCert string, commerceCode int64, commerceEmai
 
 // NewIntegrationPatpass returns a configured Webpay instance that will use
 // the integration environment
-func NewIntegrationPatpass() transbank.Patpass {
+func NewIntegrationPatpass() transbank.Transaction {
 	return &patpass{
 		webpay: new(getIntegrationPatpass()),
 	}
 }
 
 // InitTransaction performans a "patpass" transaction and returns a token
-func (pp *patpass) InitTransaction(params transbank.InitTransactionPatpass) (*transbank.InitTransactionResponse, error) {
+func (pp *patpass) InitTransaction(params transbank.InitTransaction) (*transbank.InitTransactionResponse, error) {
 	// TODO(ca): missign implementation for check if params are valid
 
 	bodyRequest := patpassInitTransactionBodyRequest{
@@ -45,12 +45,12 @@ func (pp *patpass) InitTransaction(params transbank.InitTransactionPatpass) (*tr
 			XMLnsTns:          "http://service.wswebpay.webpay.transbank.com/",
 			WSTransactionType: patpassTransactionType,
 			CommerceCode:      pp.webpay.GetCommerceCode(),
-			Amount:            params.Base.Amount,
-			SessionID:         params.Base.SessionID,
-			ReturnURL:         params.Base.ReturnURL,
-			FinalURL:          params.Base.FinalURL,
-			BuyOrder:          params.Base.BuyOrder,
-			DetailBuyOrder:    params.Base.BuyOrder,
+			Amount:            params.Amount,
+			SessionID:         params.SessionID,
+			ReturnURL:         params.ReturnURL,
+			FinalURL:          params.FinalURL,
+			BuyOrder:          params.BuyOrder,
+			DetailBuyOrder:    params.BuyOrder,
 
 			WPMDetail: &patpassWPMDetailRequest{
 				ServiceID:           params.WPMDetail.ServiceID,

@@ -41,7 +41,7 @@ func main() {
 		log.Fatalln(err)
 	}
 	
-	transaction, err := service.InitTransaction(transbank.InitTransactionPatpass{
+	transaction, err := service.InitTransaction(transbank.InitTransaction{
 		Base: transbank.InitTransaction{
 			Amount:    amount,
 			SessionID: sessionID,

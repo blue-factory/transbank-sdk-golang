@@ -1,20 +1,7 @@
 package transbank
 
-// PlusNormal define all plus normal service methods
-type PlusNormal interface {
+type Transaction interface {
 	InitTransaction(params InitTransaction) (*InitTransactionResponse, error)
-	GetTransactionResult(token string) (*TransactionResultResponse, error)
-}
-
-// PlusMall WIP: define all plus mall service methods
-type PlusMall interface {
-	InitTransaction(params InitTransactionMall) (*InitTransactionResponse, error)
-	GetTransactionResult(token string) (*TransactionResultResponse, error)
-}
-
-// Patpass define all patpass service methods
-type Patpass interface {
-	InitTransaction(params InitTransactionPatpass) (*InitTransactionResponse, error)
 	GetTransactionResult(token string) (*TransactionResultResponse, error)
 }
 
@@ -38,12 +25,10 @@ type InitTransaction struct {
 	ReturnURL string  `json:"return_url"`
 	FinalURL  string  `json:"final_url,omitempty"`
 	BuyOrder  string  `json:"buy_order"`
-}
 
-// InitTransactionMall WIP: represents the "initTransactionRequest" to SOAP server with webpay plus mall
-type InitTransactionMall struct {
-	InitTransaction
-	Stores []Store `json:"stores"`
+	Stores *[]Store `json:"stores"`
+
+	WPMDetail *WPMDetail `json:"wpm_detail"`
 }
 
 // Store WIP: ...
@@ -51,12 +36,6 @@ type Store struct {
 	CommerceCode string  `json:"commerce_code"`
 	Amount       float64 `json:"amount"`
 	BuyOrder     string  `json:"buy_order"`
-}
-
-// InitTransactionPatpass represents the "initTransactionRequest" to SOAP server
-type InitTransactionPatpass struct {
-	Base      InitTransaction
-	WPMDetail WPMDetail `json:"wpm_detail"`
 }
 
 // WPMDetail respresent the "WPMDetail" with user's inscription data

@@ -30,7 +30,7 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	transaction, err := service.InitTransaction(transbank.ParamsPlusNormalInitTransaction{
+	transaction, err := service.InitTransaction(transbank.InitTransaction{
 		Amount:    amoun,
 		SessionID: sessionID,
 		BuyOrder:  buyOrder,
