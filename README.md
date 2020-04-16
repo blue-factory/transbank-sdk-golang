@@ -1,6 +1,6 @@
 # Unofficial Transbank SDK Golang
 
-Implementación de SDK no ofical para Golang.
+Implementación de Transbank SDK (Chile) no oficial para Golang.
 
 ## Requisitos:
 
@@ -37,7 +37,7 @@ log.Println(transaction.URL) // https://webpay3gint.transbank.cl/webpayserver/in
 log.Println(transaction.Token) // e95675887afd8c5ad7d7e146468452fc4bc896541688c78cd781ded0ddef0260
 ```
 
-Puedes ver más ejemplos sobre la implementación los demás servicios en `/cmd`
+Puedes ver más ejemplos sobre la implementación de los demás servicios en `/cmd`
 
 # Tareas Pendientes
 
