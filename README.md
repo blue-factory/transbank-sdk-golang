@@ -9,7 +9,7 @@ Implementación de SDK no ofical para Golang.
 # Instalación
 
 ```bash
-go get -v github.com/microapis/transbank-sdk-golang/pkg/webpay
+go get -v github.com/microapis/transbank-sdk-golang
 ```
 
 # Documentación
