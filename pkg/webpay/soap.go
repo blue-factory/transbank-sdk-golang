@@ -14,6 +14,7 @@ const (
 
 	wsdlUrlsNormal       = "WSWebpayService"
 	wsdlUrlsMallNormal   = "WSWebpayService"
+	wsdlUrlsPatpass      = "WSWebpayService"
 	wsdlUrlsCapture      = "WSCommerceIntegrationService"
 	wsdlUrlsNullify      = "WSCommerceIntegrationService"
 	wsdlUrlsOneClick     = "OneClickPaymentService"
@@ -77,6 +78,8 @@ func buildWsdlURL(c *configuration) string {
 		wsdl = wsdlUrlsCapture
 	case ServiceMallNormal:
 		wsdl = wsdlUrlsMallNormal
+	case ServicePatpass:
+		wsdl = wsdlUrlsPatpass
 	case ServiceNormal:
 		wsdl = wsdlUrlsNormal
 	case ServiceNullify:
