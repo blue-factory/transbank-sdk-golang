@@ -16,7 +16,9 @@ go get -v github.com/microapis/transbank-sdk-golang/pkg/webpay
 
 Puedes ver la documentación generada en [pkg.go.dev](https://pkg.go.dev/github.com/microapis/transbank-sdk-golang?tab=doc) para ver la implementación de la librería. Tambien puedes consultar la [documentación oficial](https://www.transbankdevelopers.cl/documentacion/como_empezar).
 
-# Uso
+# Ejemplos
+
+## Iniciar Transacción con Webpay Plus Normal (Integración)
 
 ```golang
 amount := float64(1000)
@@ -35,9 +37,31 @@ log.Println(transaction.URL) // https://webpay3gint.transbank.cl/webpayserver/in
 log.Println(transaction.Token) // e95675887afd8c5ad7d7e146468452fc4bc896541688c78cd781ded0ddef0260
 ```
 
+## Obtener Resultado de la Transacción con Webpay Patpass (Producción)
+
+```golang
+service, err := webpay.NewPlusNormal(privateCert, publicCert, commerceCode, commerceEmail, webpay.ServicePatpass, webpay.EnvironmentProduction)
+if err != nil {
+  log.Fatalln(err)
+}
+
+result, err := service.GetTransactionResult(token)
+if err != nil {
+  log.Fatalln(err)
+}
+
+log.Println("BuyOrder", result.BuyOrder) // ordenCompra12345678
+log.Println("CardDetail.CardNumber", result.CardDetail.CardNumber) // 0568
+...
+log.Println("DetailOutput.Amount", result.DetailOutput.Amount) // 10000
+log.Println("DetailOutput.ResponseCode", result.DetailOutput.ResponseCode) // -1
+...
+log.Println("VCI", result.VCI) // TSN
+```
+
 Puedes ver más ejemplos sobre la implementación los demás servicios en la carpeta `/cmd`
 
-# Testing
+# Testing (WIP)
 
 ```bash
 go test
@@ -45,14 +69,24 @@ go test
 
 # Tareas Pendientes
 
-- [x] Plus Normal: implementar método `InitTransaction` con SOAP.
-- [x] Plus Normal: implementar método `GetTransactionResult` con SOAP.
-- [ ] Plus Mall: ...
-- [ ] Patpass: implementar método para crear transacción con HTTP.
-- [ ] Patpass: implementar método para confirmar transacción con HTTP.
-- [ ] One Click: ...
-- [ ] One Click Mall: ...
-- [ ] One Click Capture: ...
-- [ ] One Click Nullify: ...
-- [ ] SOAP: verificar si la firma del XML en la respuesta es válida con los certificados designados.
 - [x] SOAP: soporte a los posibles errores que pueda devolver el servidor.
+- [ ] SOAP: verificar si la firma del XML en la respuesta es válida con los certificados designados.
+- [x] Plus Normal: implementar método para `InitTransaction` con SOAP.
+- [ ] Plus Normal: implementar test para `InitTransaction` con SOAP.
+- [x] Plus Normal: implementar método para `GetTransactionResult` con SOAP.
+- [ ] Plus Normal: implementar test para `GetTransactionResult` con SOAP.
+- [ ] Plus Mall: implementar método para Plus Mall con SOAP/HTTP.
+- [ ] Plus Mall: implementar test para Plus Mall con SOAP/HTTP.
+- [x] Patpass: implementar método `InitTransaction` con SOAP.
+- [ ] Patpass: implementar test para `InitTransaction` con SOAP.
+- [x] Patpass: implementar método `GetTransactionResult` con SOAP.
+- [ ] Patpass: implementar test para `GetTransactionResult` con SOAP.
+- [ ] One Click: implementar métodos para OneClick usando SOAP/HTTP.
+- [ ] One Click: implementar tests para OneClick usando SOAP/HTTP.
+- [ ] One Click Mall: implementar métodos para OneClick Mall usando SOAP/HTTP.
+- [ ] One Click Mall: implementar tests para OneClick Mall usando SOAP/HTTP.
+- [ ] Capture: implementar métodos para Capture usando SOAP/HTTP.
+- [ ] Capture: implementar tests para Capture usando SOAP/HTTP.
+- [ ] Nullify: implementar métodos para Nullify usando SOAP/HTTP.
+- [ ] Nullify: implementar tests para Nullify usando SOAP/HTTP.
+- [ ] API Rest: implementar package http para montar un webservice usando un docker.
