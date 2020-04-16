@@ -19,8 +19,6 @@ Puedes ver la documentación generada en [pkg.go.dev](https://pkg.go.dev/github.
 # Uso
 
 ```golang
-import "github.com/microapis/transbank-sdk-golang/pkg/webpay"
-
 amount := float64(1000)
 sessionID := "mi-id-de-sesion"
 buyOrder := strconv.Itoa(rand.Intn(99999))
