@@ -14,11 +14,11 @@ const (
 
 	ServiceNormal       = "normal"
 	ServiceMallNormal   = "mallNormal"
+	ServicePatpass      = "patpass"
 	ServiceCapture      = "capture"
 	ServiceNullify      = "nullify"
 	ServiceOneClick     = "oneClick"
 	ServiceOneClickMall = "oneClickMall"
-	ServicePatpass      = "patpass"
 )
 
 type configuration struct {
@@ -129,7 +129,7 @@ func getIntegrationOneClickNormal() *configuration {
 	}
 }
 
-func getIntegrationPatpassNormal() *configuration {
+func getIntegrationPatpass() *configuration {
 	return &configuration{
 		PrivateCert:   integrationPatpassNormalPrivateCert,
 		PublicCert:    integrationPatpassNormalPublicCert,
