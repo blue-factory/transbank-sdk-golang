@@ -1,7 +1,5 @@
 package sign
 
-import ()
-
 type SOAPSigner interface {
 	Sign(interface{}) ([]byte, error)
 }
