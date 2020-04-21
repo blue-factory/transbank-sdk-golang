@@ -1,4 +1,4 @@
-package webpay
+package sign
 
 import (
 	"crypto/x509"
@@ -89,28 +89,28 @@ type digestMethod struct {
 	Algorithm string   `xml:"Algorithm,attr"`
 }
 
-func (w *Webpay) generateXMLRequest(payload interface{}) ([]byte, error) {
+func (ds *defaultSigner) generateXMLRequest(payload interface{}) ([]byte, error) {
 	// decode and parse public cert
-	block, _ := pem.Decode([]byte(w.config.PublicCert))
+	block, _ := pem.Decode([]byte(ds.cert))
 	cert, err := x509.ParseCertificate(block.Bytes)
 	if err != nil {
 		return nil, err
 	}
 
 	// sanitilize certificate value
-	public := strings.ReplaceAll(w.config.PublicCert, "-----BEGIN CERTIFICATE-----", "")
+	public := strings.ReplaceAll(ds.cert, "-----BEGIN CERTIFICATE-----", "")
 	public = strings.ReplaceAll(public, "-----END CERTIFICATE-----", "")
 	public = strings.ReplaceAll(public, "\r\n", "")
 	public = strings.ReplaceAll(public, "\n", "")
 	public = strings.ReplaceAll(public, "\r", "")
 	public = strings.ReplaceAll(public, "\t", "")
 
-	digestValue, err := w.digestValue(payload)
+	digestValue, err := ds.digestValue(payload)
 	if err != nil {
 		return nil, err
 	}
 
-	signatureValue, err := w.signatureValue(digestValue)
+	signatureValue, err := ds.signatureValue(digestValue)
 	if err != nil {
 		return nil, err
 	}
@@ -179,7 +179,7 @@ func (w *Webpay) generateXMLRequest(payload interface{}) ([]byte, error) {
 	return []byte(out), nil
 }
 
-func (w *Webpay) digestValue(body interface{}) (string, error) {
+func (ds *defaultSigner) digestValue(body interface{}) (string, error) {
 	parse, err := xml.Marshal(body)
 	if err != nil {
 		return "", err
@@ -195,7 +195,7 @@ func (w *Webpay) digestValue(body interface{}) (string, error) {
 	return b64, nil
 }
 
-func (w *Webpay) signatureValue(digest string) (string, error) {
+func (ds *defaultSigner) signatureValue(digest string) (string, error) {
 	s := signedInfo{
 		XMLns: "http://www.w3.org/2000/09/xmldsig#",
 		CanonicalizationMethod: canonicalizationMethod{
@@ -226,7 +226,7 @@ func (w *Webpay) signatureValue(digest string) (string, error) {
 		return "", err
 	}
 
-	hash, err := hashRSASha1(parse, w.config.PrivateCert)
+	hash, err := hashRSASha1(parse, ds.key)
 	if err != nil {
 		return "", err
 	}

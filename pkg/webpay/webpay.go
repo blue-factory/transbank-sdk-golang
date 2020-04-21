@@ -1,7 +1,10 @@
 package webpay
 
+import "github.com/microapis/transbank-sdk-golang/pkg/webpay/sign"
+
 // Webpay holds configuration that will be used by the services `service`
 type Webpay struct {
+	sign.SOAPSigner
 	config *configuration
 }
 
@@ -21,7 +24,8 @@ func New(privateCert, publicCert string, commerceCode int64, commerceEmail, serv
 
 func new(c *configuration) *Webpay {
 	w := &Webpay{
-		config: c,
+		config:     c,
+		SOAPSigner: sign.New(c.PublicCert, c.PrivateCert),
 	}
 
 	return w

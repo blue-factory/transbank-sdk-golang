@@ -23,7 +23,7 @@ const (
 
 // SOAP This method performs a SOAP request to the server with a given payload
 func (w *Webpay) SOAP(payload interface{}) ([]byte, error) {
-	XMLReq, err := w.generateXMLRequest(payload)
+	XMLReq, err := w.Sign(payload)
 	if err != nil {
 		return nil, err
 	}

@@ -4,6 +4,7 @@ import (
 	"encoding/xml"
 	"errors"
 	"fmt"
+	"github.com/microapis/transbank-sdk-golang/pkg/webpay/sign"
 	"net/url"
 
 	"github.com/microapis/transbank-sdk-golang"
@@ -191,7 +192,7 @@ type initTransactionEnvolpeResponse struct {
 
 type initTransactionBodyResponse struct {
 	XMLName                    xml.Name `xml:"Body"`
-	Fault                      *SoapFault
+	Fault                      *sign.SoapFault
 	Ns2InitTransactionResponse *initTransactionResponse
 }
 
@@ -221,7 +222,7 @@ type transactionResultEnvolpeResponse struct {
 
 type transactionResultBodyResponse struct {
 	XMLName                      xml.Name `xml:"Body"`
-	Fault                        *SoapFault
+	Fault                        *sign.SoapFault
 	Ns2TransactionResultResponse *transactionResultResponse
 }
 
