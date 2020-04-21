@@ -35,7 +35,7 @@ func main() {
 		SessionID: sessionID,
 		BuyOrder:  buyOrder,
 		ReturnURL: returnURL,
-		FinalURL: finalURL,
+		FinalURL:  finalURL,
 	})
 	if err != nil {
 		log.Fatalln(err)

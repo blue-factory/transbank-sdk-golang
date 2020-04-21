@@ -26,7 +26,7 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	
+
 	result, err := service.GetTransactionResult(token)
 	if err != nil {
 		log.Fatalln(err)

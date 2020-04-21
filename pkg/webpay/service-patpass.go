@@ -83,15 +83,15 @@ type patpassInitTransactionBodyRequest struct {
 }
 
 type patpassWPMDetailRequest struct {
-	XMLName xml.Name `xml:"wPMDetail"`
-	ServiceID           string `xml:"serviceId"`
-	CardHolderID        string `xml:"cardHolderId"`
-	CardHolderName      string `xml:"cardHolderName"`
-	CardHolderLastName1 string `xml:"cardHolderLastName1"`
-	CardHolderLastName2 string `xml:"cardHolderLastName2"`
-	CardHolderMail      string `xml:"cardHolderMail"`
-	CellPhoneNumber     string `xml:"cellPhoneNumber"`
-	ExpirationDate      string `xml:"expirationDate"`
-	CommerceMail        string `xml:"commerceMail"`
-	UfFlag              bool   `xml:"ufFlag"`
+	XMLName             xml.Name `xml:"wPMDetail"`
+	ServiceID           string   `xml:"serviceId"`
+	CardHolderID        string   `xml:"cardHolderId"`
+	CardHolderName      string   `xml:"cardHolderName"`
+	CardHolderLastName1 string   `xml:"cardHolderLastName1"`
+	CardHolderLastName2 string   `xml:"cardHolderLastName2"`
+	CardHolderMail      string   `xml:"cardHolderMail"`
+	CellPhoneNumber     string   `xml:"cellPhoneNumber"`
+	ExpirationDate      string   `xml:"expirationDate"`
+	CommerceMail        string   `xml:"commerceMail"`
+	UfFlag              bool     `xml:"ufFlag"`
 }

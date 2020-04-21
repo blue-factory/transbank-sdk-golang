@@ -176,10 +176,10 @@ type initTransactionResquest struct {
 	ReturnURL         string   `xml:"wsInitTransactionInput>returnURL"`
 	FinalURL          string   `xml:"wsInitTransactionInput>finalURL"`
 	BuyOrder          string   `xml:"wsInitTransactionInput>buyOrder"`
-	
-	CommerceCode      int64    `xml:"wsInitTransactionInput>transactionDetails>commerceCode"`
-	Amount            float64  `xml:"wsInitTransactionInput>transactionDetails>amount"`
-	DetailBuyOrder    string   `xml:"wsInitTransactionInput>transactionDetails>buyOrder"`
+
+	CommerceCode   int64   `xml:"wsInitTransactionInput>transactionDetails>commerceCode"`
+	Amount         float64 `xml:"wsInitTransactionInput>transactionDetails>amount"`
+	DetailBuyOrder string  `xml:"wsInitTransactionInput>transactionDetails>buyOrder"`
 
 	WPMDetail *patpassWPMDetailRequest `xml:"wsInitTransactionInput>wPMDetail"`
 }
@@ -215,7 +215,7 @@ type transactionResultResquest struct {
 }
 
 type transactionResultEnvolpeResponse struct {
-	XMLName xml.Name                                `xml:"Envelope"`
+	XMLName xml.Name                      `xml:"Envelope"`
 	Body    transactionResultBodyResponse `xml:"Body"`
 }
 
