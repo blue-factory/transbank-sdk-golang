@@ -42,14 +42,12 @@ func main() {
 	}
 	
 	transaction, err := service.InitTransaction(transbank.InitTransaction{
-		Base: transbank.InitTransaction{
 			Amount:    amount,
 			SessionID: sessionID,
 			BuyOrder:  buyOrder,
 			ReturnURL: returnURL,
 			FinalURL:  finalURL,
-		},
-		WPMDetail: transbank.WPMDetail{
+		WPMDetail: &transbank.WPMDetail{
 			ServiceID:           serviceID,
 			CardHolderID:        cardHolderID,
 			CardHolderName:      cardHolderName,
