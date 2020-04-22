@@ -1,4 +1,4 @@
-package webpay
+package sign
 
 import (
 	"crypto"

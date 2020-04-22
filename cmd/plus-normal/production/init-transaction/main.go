@@ -31,11 +31,11 @@ func main() {
 	}
 
 	transaction, err := service.InitTransaction(transbank.InitTransaction{
-		Amount:    amoun,
+		Amount:    amount,
 		SessionID: sessionID,
 		BuyOrder:  buyOrder,
 		ReturnURL: returnURL,
-		FinalURL, finalURL,
+		FinalURL:  finalURL,
 	})
 	if err != nil {
 		log.Fatalln(err)
