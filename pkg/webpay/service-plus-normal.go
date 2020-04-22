@@ -4,8 +4,9 @@ import (
 	"encoding/xml"
 	"errors"
 	"fmt"
-	"github.com/microapis/transbank-sdk-golang/pkg/webpay/sign"
 	"net/url"
+
+	"github.com/microapis/transbank-sdk-golang/pkg/sign"
 
 	"github.com/microapis/transbank-sdk-golang"
 )
