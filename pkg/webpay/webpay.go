@@ -1,6 +1,6 @@
 package webpay
 
-import "github.com/microapis/transbank-sdk-golang/pkg/webpay/sign"
+import "github.com/microapis/transbank-sdk-golang/pkg/sign"
 
 // Webpay holds configuration that will be used by the services `service`
 type Webpay struct {
