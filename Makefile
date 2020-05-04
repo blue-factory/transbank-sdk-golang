@@ -15,7 +15,7 @@
 #
 # Internal variables
 #
-VERSION=0.0.1
+VERSION=0.0.2
 NAME=webpay
 SVC=$(NAME)-api
 BIN_PATH=$(PWD)/bin
